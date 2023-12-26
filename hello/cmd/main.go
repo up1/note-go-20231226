@@ -1,8 +1,20 @@
 package main
 
-import "demo"
+import (
+	"demo"
+	"fmt"
+)
 
 func main() {
+	b := demo.Bank{}
+	req := demo.DepositRequest{
+		AccountNo: "1234567890",
+		Amount:    100,
+	}
+	b.Deposit(req)
+	b.Withdraw()
+	fmt.Println(req)
+
 	r, err := demo.TryError()
 	if err != nil {
 		println(err.Error())
