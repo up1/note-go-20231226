@@ -6,12 +6,14 @@ import (
 )
 
 func main() {
-	b := demo.Bank{}
+	b := demo.NewBank("Hello")
 	req := demo.DepositRequest{
 		AccountNo: "1234567890",
 		Amount:    100,
 	}
+	b.Message = "Before"
 	b.Deposit(req)
+	println(b.Message)
 	b.Withdraw()
 	fmt.Println(req)
 
@@ -22,7 +24,7 @@ func main() {
 			Amount:    100,
 		},
 	}
-	println(r2.DepositRequest)
+	// println(r2.DepositRequest)
 	println(r2.Amount)
 	println(r2.Credit)
 

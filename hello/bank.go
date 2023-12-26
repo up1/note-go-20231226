@@ -1,9 +1,17 @@
 package demo
 
 type Bank struct {
+	Message string
 }
 
-func (b Bank) Deposit(req DepositRequest) error {
+func NewBank(message string) Bank {
+	return Bank{
+		Message: message,
+	}
+}
+
+func (b *Bank) Deposit(req DepositRequest) error {
+	b.Message = "Deposit"
 	return nil
 }
 
