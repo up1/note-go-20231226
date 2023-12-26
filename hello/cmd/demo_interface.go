@@ -25,8 +25,10 @@ func doWork(e Employee) {
 }
 
 func main() {
-	e1 := Manager{"Somkiat"}
-	e2 := Programmer{"Somkiat 2"}
+	e1 := Manager{name: "Somkiat"}
+	e2 := Programmer{
+		name: "Somkiat 2",
+	}
 	doWork(e1)
 	doWork(e2)
 
