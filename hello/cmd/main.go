@@ -15,6 +15,17 @@ func main() {
 	b.Withdraw()
 	fmt.Println(req)
 
+	r2 := demo.DepositRequestV2{
+		Credit: true,
+		DepositRequest: demo.DepositRequest{
+			AccountNo: "1234567890",
+			Amount:    100,
+		},
+	}
+	println(r2.DepositRequest)
+	println(r2.Amount)
+	println(r2.Credit)
+
 	r, err := demo.TryError()
 	if err != nil {
 		println(err.Error())
