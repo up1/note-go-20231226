@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
-	"iotuil"
 	"log"
+	"os"
 )
 
-func main() {
-	body, err := iotuil.ReadFile("file.txt")
+func try01() {
+	body, err := os.ReadFile("file.txt")
 	if err != nil {
 		log.Fatalf("unable to read file: %v", err)
 	}

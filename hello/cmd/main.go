@@ -7,7 +7,7 @@ func main() {
 	if err != nil {
 		println(err.Error())
 	}
-	println(r, 1/0)
+	println(r)
 
 	result := demo.SayHi()
 	println(result)
