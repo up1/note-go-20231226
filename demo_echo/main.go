@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 
+	"github.com/labstack/echo-contrib/echoprometheus"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
@@ -10,6 +11,9 @@ import (
 func main() {
 	e := echo.New()
 	e.Use(middleware.Recover())
+	e.Use(echoprometheus.NewMiddleware("demo_service"))
+	e.GET("/metrics", echoprometheus.NewHandler())
+
 	e.GET("/", hello)
 	e.GET("/panic", tryToFail)
 	e.Logger.Fatal(e.Start(":1323"))
