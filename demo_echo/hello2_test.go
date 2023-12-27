@@ -35,7 +35,7 @@ func TestHelloAPI(t *testing.T) {
 
 // 	// Assertions
 // 	expect := `{"message":"Internal Server Error"}`
-// 	if assert.NoError(t, e.Router().Find(echo.GET, "/panic", c)) {
+// 	if assert.NoError(t, demo.TryToFail(c)) {
 // 		assert.Equal(t, http.StatusInternalServerError, rec.Code)
 // 		assert.Equal(t, expect, strings.TrimSpace(rec.Body.String()))
 // 	}
