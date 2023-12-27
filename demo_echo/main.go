@@ -13,6 +13,7 @@ func main() {
 	e.Use(middleware.Recover())
 	e.Use(echoprometheus.NewMiddleware("demo_service"))
 	e.GET("/metrics", echoprometheus.NewHandler())
+	e.Use(middleware.Logger())
 
 	e.GET("/", hello)
 	e.GET("/panic", tryToFail)
