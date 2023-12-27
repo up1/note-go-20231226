@@ -16,6 +16,8 @@ func main() {
 	e.Use(middleware.Logger())
 
 	// Create dependency
+	demo.MyRepo = &MockHelloRepo{}
+
 	repo := MockHelloRepo{}
 	e.GET("/", demo.Hello(&repo))
 

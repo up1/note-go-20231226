@@ -6,6 +6,9 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+// Global variable
+var MyRepo Repository
+
 type Message struct {
 	Message string `json:"message_123"`
 }
@@ -13,6 +16,7 @@ type Message struct {
 func Hello(repo Repository) func(c echo.Context) error {
 	return func(c echo.Context) error {
 		result, _ := repo.GetData()
+		MyRepo.GetData()
 		m := Message{
 			Message: result,
 		}
