@@ -9,7 +9,12 @@ import (
 func main() {
 	e := echo.New()
 	e.GET("/", hello)
+	e.GET("/panic", tryToFail)
 	e.Logger.Fatal(e.Start(":1323"))
+}
+
+func tryToFail(c echo.Context) error {
+	panic("I'm panicking!")
 }
 
 type Message struct {
