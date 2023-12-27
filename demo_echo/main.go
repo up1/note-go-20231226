@@ -4,10 +4,12 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
 	e := echo.New()
+	e.Use(middleware.Recover())
 	e.GET("/", hello)
 	e.GET("/panic", tryToFail)
 	e.Logger.Fatal(e.Start(":1323"))
