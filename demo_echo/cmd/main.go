@@ -6,6 +6,9 @@ import (
 	"github.com/labstack/echo-contrib/echoprometheus"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+
+	"net/http"
+	"net/http/pprof"
 )
 
 func main() {
@@ -14,6 +17,8 @@ func main() {
 	e.Use(echoprometheus.NewMiddleware("demo_service"))
 	e.GET("/metrics", echoprometheus.NewHandler())
 	e.Use(middleware.Logger())
+
+	e.GET("/debug/pprof/*", echo.WrapHandler(http.HandlerFunc(pprof.Index)))
 
 	// Create dependency
 	// db, _ := demo.CreateConnection()

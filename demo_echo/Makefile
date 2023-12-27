@@ -10,6 +10,10 @@ lint:
 	@echo "Linting code"
 	@golangci-lint run
 
+run:
+	@echo "Running in dev mode"
+	@go run cmd/main.go
+
 build:
 	@echo "Building binary"
 	@go build -o demo_api cmd/main.go
