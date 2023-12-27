@@ -15,7 +15,15 @@ func main() {
 	e.GET("/metrics", echoprometheus.NewHandler())
 	e.Use(middleware.Logger())
 
-	e.GET("/", demo.Hello)
+	// Create dependency
+	repo := MockHelloRepo{}
+	e.GET("/", demo.Hello(&repo))
 	e.GET("/panic", demo.TryToFail)
 	e.Logger.Fatal(e.Start(":1323"))
+}
+
+type MockHelloRepo struct{}
+
+func (r *MockHelloRepo) GetData() (string, error) {
+	return "Hello World", nil
 }
