@@ -20,5 +20,6 @@ func NewHelloRepo(db *sql.DB) Repository {
 
 func (r *helloRepo) GetData() (string, error) {
 	// Query data from table message
+	r.Db.Query("SELECT * FROM message")
 	panic("underconstruction !!")
 }
