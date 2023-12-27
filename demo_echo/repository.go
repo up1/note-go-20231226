@@ -1,5 +1,7 @@
 package demo
 
+import "database/sql"
+
 // Get data from the database
 
 type Repository interface {
@@ -7,10 +9,13 @@ type Repository interface {
 }
 
 type helloRepo struct {
+	Db *sql.DB
 }
 
-func NewHelloRepo() Repository {
-	return &helloRepo{}
+func NewHelloRepo(db *sql.DB) Repository {
+	return &helloRepo{
+		Db: db,
+	}
 }
 
 func (r *helloRepo) GetData() (string, error) {

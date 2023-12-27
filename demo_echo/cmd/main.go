@@ -16,6 +16,9 @@ func main() {
 	e.Use(middleware.Logger())
 
 	// Create dependency
+	db, _ := demo.CreateConnection()
+	demo.NewHelloRepo(db)
+
 	demo.MyRepo = &MockHelloRepo{}
 
 	repo := MockHelloRepo{}
