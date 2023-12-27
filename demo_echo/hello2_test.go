@@ -17,6 +17,7 @@ func TestUnitHelloAPI(t *testing.T) {
 	req := httptest.NewRequest(http.MethodGet, "/", nil)
 	rec := httptest.NewRecorder()
 	c := e.NewContext(req, rec)
+	e.ServeHTTP(rec, req)
 
 	// Assertions
 	expect := `{"message_123":"Hello, World!"}`
