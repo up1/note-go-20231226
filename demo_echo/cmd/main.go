@@ -18,6 +18,12 @@ func main() {
 	// Create dependency
 	repo := MockHelloRepo{}
 	e.GET("/", demo.Hello(&repo))
+
+	env := demo.Env{
+		Repo: &repo,
+	}
+	e.GET("/hello2", env.Hello2)
+
 	e.GET("/panic", demo.TryToFail)
 	e.Logger.Fatal(e.Start(":1323"))
 }

@@ -20,6 +20,19 @@ func Hello(repo Repository) func(c echo.Context) error {
 	}
 }
 
+type Env struct {
+	Repo Repository
+}
+
+func (env *Env) Hello2(c echo.Context) error {
+	result, _ := env.Repo.GetData()
+	m := Message{
+		Message: result,
+	}
+	return c.JSON(http.StatusOK, m)
+
+}
+
 func TryToFail(c echo.Context) error {
 	panic("I'm panicking!")
 }
