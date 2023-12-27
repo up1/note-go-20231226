@@ -33,7 +33,6 @@ func (r *MockHelloRepo) GetData() (string, error) {
 }
 
 func TestPaicAPI(t *testing.T) {
-
 	e := echo.New()
 	e.Use(middleware.Recover())
 	req := httptest.NewRequest(http.MethodGet, "/panic", nil)
