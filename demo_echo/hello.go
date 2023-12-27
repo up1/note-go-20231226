@@ -11,7 +11,11 @@ type Message struct {
 }
 
 func Hello(c echo.Context) error {
-	m := Message{"Hello, World!"}
+	repo := NewHelloRepo()
+	result, _ := repo.GetData()
+	m := Message{
+		Message: result,
+	}
 	return c.JSON(http.StatusOK, m)
 }
 

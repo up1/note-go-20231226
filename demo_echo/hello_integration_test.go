@@ -5,7 +5,6 @@ package demo_test
 import (
 	"context"
 	"demo"
-	"fmt"
 	"io"
 	"net"
 	"net/http"
@@ -35,7 +34,7 @@ func TestIntegrationHelloSuccess(t *testing.T) {
 	assert.NoError(t, err)
 
 	// Make a request to the server
-	if resp, err := http.Get(fmt.Sprintf("http://127.0.0.1:1323/panic")); err == nil {
+	if resp, err := http.Get("http://127.0.0.1:1323/panic"); err == nil {
 		defer func(Body io.ReadCloser) {
 			err := Body.Close()
 			if err != nil {
