@@ -14,3 +14,7 @@ func Hello(c echo.Context) error {
 	m := Message{"Hello, World!"}
 	return c.JSON(http.StatusOK, m)
 }
+
+func TryToFail(c echo.Context) error {
+	panic("I'm panicking!")
+}

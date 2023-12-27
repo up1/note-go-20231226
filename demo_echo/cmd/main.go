@@ -16,10 +16,6 @@ func main() {
 	e.Use(middleware.Logger())
 
 	e.GET("/", demo.Hello)
-	e.GET("/panic", tryToFail)
+	e.GET("/panic", demo.TryToFail)
 	e.Logger.Fatal(e.Start(":1323"))
-}
-
-func tryToFail(c echo.Context) error {
-	panic("I'm panicking!")
 }

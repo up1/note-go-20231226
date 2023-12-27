@@ -4,6 +4,7 @@ package demo_test
 
 import (
 	"context"
+	"demo"
 	"fmt"
 	"io"
 	"net"
@@ -13,16 +14,16 @@ import (
 	"time"
 
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestIntegrationHelloSuccess(t *testing.T) {
 	e := echo.New()
+	e.Use(middleware.Recover())
 
 	// Register the handler
-	e.GET("/ok", func(c echo.Context) error {
-		return c.String(http.StatusOK, "OK")
-	})
+	e.GET("/panic", demo.TryToFail)
 
 	// Start the server
 	errCh := make(chan error)
@@ -34,17 +35,18 @@ func TestIntegrationHelloSuccess(t *testing.T) {
 	assert.NoError(t, err)
 
 	// Make a request to the server
-	if resp, err := http.Get(fmt.Sprintf("http://127.0.0.1:1323/ok")); err == nil {
+	if resp, err := http.Get(fmt.Sprintf("http://127.0.0.1:1323/panic")); err == nil {
 		defer func(Body io.ReadCloser) {
 			err := Body.Close()
 			if err != nil {
 				assert.Fail(t, err.Error())
 			}
 		}(resp.Body)
-		assert.Equal(t, http.StatusOK, resp.StatusCode)
+		assert.Equal(t, http.StatusInternalServerError, resp.StatusCode)
 
+		expect := `{"message":"Internal Server Error"}`
 		if body, err := io.ReadAll(resp.Body); err == nil {
-			assert.Equal(t, "OK", string(body))
+			assert.Equal(t, expect, strings.TrimSpace(string(body)))
 		} else {
 			assert.Fail(t, err.Error())
 		}
