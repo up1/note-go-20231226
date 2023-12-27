@@ -1,3 +1,4 @@
+// go test -bench .
 package demo_test
 
 import (
